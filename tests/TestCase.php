@@ -11,9 +11,9 @@ use Orchestra\Testbench\TestCase as OrchestraTestCase;
 
 abstract class TestCase extends OrchestraTestCase
 {
-    protected function getEnvironmentSetUp($app)
+    protected function defineEnvironment($app)
     {
-        $apiKey = config('cashier.secret');
+        $apiKey = $app['config']->get('cashier.secret');
 
         if ($apiKey && ! Str::startsWith($apiKey, 'sk_test_')) {
             throw new InvalidArgumentException('Tests may not be run with a production Stripe key.');
