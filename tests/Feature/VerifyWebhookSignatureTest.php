@@ -20,12 +20,14 @@ class VerifyWebhookSignatureTest extends TestCase
      */
     protected $timestamp;
 
-    public function setUp(): void
+    public function defineEnvironment($app)
     {
-        parent::setUp();
+        parent::defineEnvironment($app);
 
-        config(['cashier.webhook.secret' => 'secret']);
-        config(['cashier.webhook.tolerance' => 300]);
+        $app['config']->set([
+            'cashier.webhook.secret' => 'secret',
+            'cashier.webhook.tolerance' => 300,
+        ]);
 
         $this->request = new Request([], [], [], [], [], [], 'Signed Body');
     }

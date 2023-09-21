@@ -21,11 +21,13 @@ abstract class FeatureTestCase extends TestCase
             $this->markTestSkipped('Stripe secret key not set.');
         }
 
-        parent::setUp();
+        $this->afterApplicationCreated(function () {
+            $curl = new StripeCurlClient([CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1]);
+            $curl->setEnableHttp2(false);
+            StripeApiRequestor::setHttpClient($curl);
+        });
 
-        $curl = new StripeCurlClient([CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1]);
-        $curl->setEnableHttp2(false);
-        StripeApiRequestor::setHttpClient($curl);
+        parent::setUp();
     }
 
     protected static function stripe(array $options = []): StripeClient
