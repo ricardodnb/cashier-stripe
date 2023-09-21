@@ -2,6 +2,7 @@
 
 namespace Laravel\Cashier\Tests\Feature;
 
+use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Laravel\Cashier\Cashier;
 use Laravel\Cashier\Tests\Fixtures\User;
@@ -13,7 +14,7 @@ use Stripe\StripeClient;
 
 abstract class FeatureTestCase extends TestCase
 {
-    use RefreshDatabase, WithLaravelMigrations;
+    use LazilyRefreshDatabase, WithLaravelMigrations;
 
     protected function setUp(): void
     {

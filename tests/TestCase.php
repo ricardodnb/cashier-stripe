@@ -6,13 +6,12 @@ use Illuminate\Support\Str;
 use InvalidArgumentException;
 use Laravel\Cashier\Cashier;
 use Laravel\Cashier\Tests\Fixtures\User;
-use Orchestra\Testbench\Concerns\WithLaravelMigrations;
 use Orchestra\Testbench\Concerns\WithWorkbench;
 use Orchestra\Testbench\TestCase as OrchestraTestCase;
 
 abstract class TestCase extends OrchestraTestCase
 {
-    use WithLaravelMigrations, WithWorkbench;
+    use WithWorkbench;
 
     protected function defineEnvironment($app)
     {
